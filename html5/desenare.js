@@ -23,7 +23,13 @@ function start()
 	
 	document.getElementById("id_start_button").disabled = true;
 	document.getElementById("id_stop_button").disabled = false;
-	id_timer = setInterval(deseneaza_cerc, 10 , context,canvas.width , canvas.height, unghi )
+	my_worker.onmessage = function (e){
+		documetn,getElementById("id_prime").innerHTML=e.data;
+		
+	}
+	
+	var my_worker=new Worker("calcul_prime.js");
+	id_timer = setInterval(deseneaza_cerc, 10 , context,canvas.width , canvas.height, unghi );
 	
 	
 }
