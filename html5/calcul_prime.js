@@ -6,7 +6,11 @@ onmessage= function (e)
 	{
 		stopped= true;
 	}
-	
+	else
+		if(e.data == "start")
+	{
+		stopped= false;
+	}
 }
 
 function is_prim(n){
