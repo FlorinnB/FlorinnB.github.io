@@ -33,4 +33,8 @@ function on_device_motion(e)
 	document.getElementById("id_acc_z").innerHTML=Math.round(acc_z *100)/100;
 	document.getElementById("id_acc_x").innerHTML=Math.round(acc_x *100)/100 ;
 	document.getElementById("id_acc_y").innerHTML=Math.round(acc_y *100)/100;
+	
+	
+	document.getElementById("id_rot_x").innerHTML = Math.round(Math.atan(acc_x / acc_z)*100)/100;
+	document.getElementById("id_rot_y").innerHTML = Math.round(Math.atan(acc_y / acc_z)*100)/100;
 }
