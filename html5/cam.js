@@ -21,6 +21,6 @@ alert("Cannot read camera");
 
 function start()
 { 
-var c = {audio:true,video= true};
+var c = {audio:true,video: true};
 navigator.mediaDevices.getUserMedia(c).then(on_success).catch(on_failure);
 }
