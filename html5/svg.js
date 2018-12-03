@@ -11,7 +11,7 @@ function on_device_orientation(e)
 	var svg_height = svg.getAttribute("height");
 		var svg_width = svg.getAttribute("width");
 
-	cerc.setAttribute("cx",svg_width/2 + e.gamma/90 * (svg_width/2 -R);
+	cerc.setAttribute("cx",svg_width/2 + e.gamma/90 * (svg_width/2 -R));
 		cerc.setAttribute("cy",svg_height+e.beta/90*(svg_height/2-R));
 
 	
