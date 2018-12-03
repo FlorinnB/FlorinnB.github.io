@@ -45,61 +45,57 @@ func citire()->[Float]
     }
 }
 //---------------------------------------------------------
-func rezolva(coef: [Float], x1: inout [Float], x2: inout [Float])
+func rezolva(_ coef: [Float]) -> [[Float]] 
 {
-   
-    
+
     let delta = coef[1] * coef[1] - 4 * coef[0] * coef[2]
     
     if delta >= 0{
-       x1.append ( (-coef[1] - sqrt(delta)) / (2 * coef[0]))
-        x2.append( (-coef[1] + sqrt(delta)) / (2 * coef[0]))
-       x1.append(Float(0.0))
-        x2.append(Float(0.0))
-     
-    }
-    else{
-     x1.append ( (-coef[1]) / (2 * coef[0]) )
-        x2.append ( (-coef[1]) / (2 * coef[0]))
-       x1.append(-sqrt(-delta) / (2 * coef[0]))
-      x2.append ( sqrt(-delta) / (2 * coef[0]))
+    return [[(-coef[1] - sqrt(delta)) / (2 * coef[0]), Float(0.0)], [(-coef[1] + sqrt(delta)) / (2 * coef[0]), Float(0.0)]]
       
     }
+    else{
+    return [[(-coef[1]) / (2 * coef[0]), -sqrt(-delta) / (2 * coef[0])], [(-coef[1]) / (2 * coef[0]), sqrt(-delta) / (2 * coef[0])]]
+    }
 }
 //---------------------------------------------------------
-func tipareste(x1: [Float], x2: [Float])
+func tipareste( x1: [[Float]])
 {
-    print("x1 = \(x1[0]) + \(x1[1])")
-    print("x2 = \(x2[0]) + \(x2[1])")
+    print("x1 = \(x1[0][0]) + \(x1[0][1])")
+    print("x2 = \(x1[1][0]) + \(x1[1][1])")
 }
 //---------------------------------------------------------
-
-func tipareste_coeficienti(_ coef:[Float])
+func tipareste_coeficienti(_ coef: [Float])
 {
-    for x in coef {
+/*
+    for x in coef{
         print(x)
     }
- 
+    */
     
-    var i=0
-    while i<coef.count{
+    /*
+    var i = 0
+    while i < coef.count{
         print(coef[i])
-        i=i+1
+        i = i + 1
     }
-    var i=0
-    repeat{
-              print(coef[i])
-        i = i + 1  
-    }while i < coef.count
+     */
+     
+    var i = 0
+        repeat{
+            print(coef[i])
+        i = i + 1
+        } while i < coef.count
+     
+}
+//----------------------------------------------------------
+func calculeaza(_ citeste: ()->[Float],_ rezolva: ([Float])->[[Float]],_ tipareste: ([[Float]])->Void)
+{
+   let coef = citeste()
+
+
+var x = rezolva(coef: coef)
+tipareste(x: x) 
 }
 
-var x1 = [Float]()
-var x2 = [Float]()
-
-
-let coef = citire()
-tipareste_coeficienti(coef)
-
-
-rezolva(coef: coef,x1:&x1,x2:&x2)
-tipareste(x1: x1, x2: x2)
+calculeaza(citire,rezolva,tipareste)
