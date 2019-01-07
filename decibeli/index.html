@@ -1,14 +1,66 @@
-<!DOCTYPE html>
- <html>
- <head>
- <link rel="stylesheet" href="style.css">
- </head>
- <body>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DecibelMeter example</title>
+    
  
- <h1>VU meter from mic input (getUserMedia API)</h1>
- <canvas id="canvas" width="150" height="300"></canvas>
-  <script src="deci.js"></script>
- </body>
+    <link rel="stylesheet" href="style.css">
+</head>
 
- </html>
- 
+<body>
+
+<div id="message">Click mic to toggle listening</div>
+
+<div id="meter" class="icon-microphone"><span></span></div>
+
+<script src="deci.js"></script>
+
+<script>
+	// HTML elements
+	
+	var meterEl = document.getElementById('meter'),
+		levelEl = document.querySelector('#meter > span');
+	
+	
+	// Decibel Meter
+	
+	var meter = DecibelMeter.create('meter');
+	
+	// listen for audio sources to be ready
+	
+	meter.on('ready', function (meter, sources) {
+		var mic = sources[0]; // select first mic
+		meter.connect(mic); // connect to mic
+	});
+	
+	// adjust displayed level when audio sampled
+	
+	meter.on('sample', function (dB, percent, level) {
+		levelEl.style.height = (percent * 100) + '%';
+	});
+	
+	// change element class when meter starts listening
+	
+	meter.on('listen', function (meter) {
+		meterEl.classList.add('active');
+	});
+	
+	// change element class when meter stops listening
+	
+	meter.on('stop-listening', function (meter) {
+		meterEl.classList.remove('active');
+		levelEl.style.height = 0;
+	});
+	
+	// clicking the meter element will toggle listening
+	
+	meterEl.addEventListener('click', function (e) {
+		if (meter.listening)
+			meter.stopListening();
+		else
+			meter.listen();
+	});
+</script>
+</body>
+</html>
