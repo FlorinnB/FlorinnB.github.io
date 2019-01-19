@@ -91,13 +91,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private double getDecibles() {
+    public int getDecibles() {
         if (mediaRecorder == null) {
-          return 0;
+            return 0;
         } else {
-            amplitude =  mediaRecorder.getMaxAmplitude();
+            amplitude =   mediaRecorder.getMaxAmplitude();
 
-            return 20 * Math.log10((double)amplitude);
+            return (int)(20 * Math.log10((double)(amplitude)/0.9));
         }
     }
 
