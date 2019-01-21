@@ -38,14 +38,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
       Decibels = findViewById(R.id.decibel);
         mediaRecorder = null;
-        textView = (TextView) findViewById(R.id.textView);
-        button = (Button) findViewById(R.id.button);
+        textView = findViewById(R.id.textView);
+        button = findViewById(R.id.button);
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                textView.append("n " + location.getLongitude() + " " + location.getLatitude());
+                textView.append( location.getLongitude() + " " + location.getLatitude());
             }
 
             @Override
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     void configure_button() {
-        // first check for permissions
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -130,11 +130,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return;
         }
-        // this code won'textView execute IF permissions are not allowed, because in the line above there is return statement.
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //noinspection MissingPermission
+
                 locationManager.requestLocationUpdates("gps", 5000, 0, listener);
             }
         });
